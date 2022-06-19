@@ -5,17 +5,18 @@ export const RenderRadioControl: FC<RadioControl> = ({ name, value, setValue, op
     const onChange: ChangeEventHandler<HTMLInputElement> = (e) => setValue(e.target.value);
 
     return (
-        <div className="">
-            <div className="">{name}</div>
+        <div className="storybox-control">
+            <div className="storybox-text storybox-control_label">{name}</div>
             <div className="">
                 {options.map((option) => (
-                    <label className="" key={option}>
+                    <label className="storybox-text" key={option}>
                         <span className="">{option}</span>
                         <input
                             type="radio"
                             checked={option === value}
                             value={option}
                             onChange={onChange}
+                            className="storybox-text"
                         />
                     </label>
                 ))}

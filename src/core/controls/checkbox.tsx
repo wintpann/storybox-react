@@ -13,17 +13,18 @@ export const RenderCheckboxControl: FC<CheckboxControl> = ({ name, value, setVal
     };
 
     return (
-        <div className="">
-            <div className="">{name}</div>
+        <div className="storybox-control">
+            <div className="storybox-text storybox-control_label">{name}</div>
             <div className="">
                 {options.map((option) => (
-                    <label className="" key={option}>
-                        <span className="">{option}</span>
+                    <label className="storybox-text" key={option}>
+                        <span className="storybox-text">{option}</span>
                         <input
                             type="checkbox"
                             checked={value.includes(option)}
                             value={option}
                             onChange={onChange}
+                            className="storybox-text"
                         />
                     </label>
                 ))}

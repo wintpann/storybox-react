@@ -22,7 +22,7 @@ export const StoryBox: FC<{
 
     return (
         <div className="storybox-story">
-            <div className="storybox-story_controls-window">
+            <div className="storybox-story_controls-window storybox-scroll">
                 {Object.entries(controls).map(([id, control]) => (
                     <RenderControl key={id} control={control} />
                 ))}

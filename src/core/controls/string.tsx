@@ -8,7 +8,7 @@ export const RenderStringControl: FC<StringControl> = ({
     minLength,
     maxLength,
 }) => {
-    const onChange: ChangeEventHandler<HTMLInputElement> = (e) => {
+    const onChange: ChangeEventHandler<HTMLTextAreaElement> = (e) => {
         const updated: string = e.target.value;
         if (maxLength && updated.length > maxLength) return;
         if (minLength && updated.length < minLength) return;
@@ -17,9 +17,9 @@ export const RenderStringControl: FC<StringControl> = ({
     };
 
     return (
-        <div className="">
-            <div className="">{name}</div>
-            <input className="" type="text" value={value} onChange={onChange} />
+        <div className="storybox-control">
+            <div className="storybox-text storybox-control_label">{name}</div>
+            <textarea className="storybox-textarea" value={value} onChange={onChange} />
         </div>
     );
 };

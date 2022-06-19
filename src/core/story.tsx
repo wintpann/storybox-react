@@ -1,10 +1,10 @@
 import React, { createContext, FC, ReactNode, useContext } from 'react';
-import { ControlsContextType } from './type';
-import { noop, useNode } from './utils';
+import { Control, ControlsContextType } from './type';
+import { noop, Subject, useNode, useSubjectValue } from './utils';
 import { RenderControl } from './controls';
 
 export const ControlsContext = createContext<ControlsContextType>({
-    controls: {},
+    controls: new Subject<Record<string, Control>>({}),
     updateControlValue: noop,
     deleteControl: noop,
     createControl: noop,
@@ -13,7 +13,8 @@ export const ControlsContext = createContext<ControlsContextType>({
 export const StoryBox: FC<{
     children: ReactNode | ((parent: HTMLElement) => void);
 }> = ({ children }) => {
-    const { controls } = useContext(ControlsContext);
+    const { controls: controlsSubject } = useContext(ControlsContext);
+    const controls = useSubjectValue(controlsSubject);
     const [node, setNode] = useNode();
 
     const childrenFunction = typeof children === 'function' && node ? children(node) : null;

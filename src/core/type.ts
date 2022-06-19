@@ -1,3 +1,5 @@
+import { Subject } from './utils';
+
 export interface BaseControl<T> {
     id: string;
     type: string;
@@ -54,7 +56,7 @@ export type UseControl<ControlType extends Control, OmitTypes extends string = '
 ) => [ControlType['value'], ControlType['setValue']];
 
 export type ControlsContextType = {
-    controls: Record<string, Control>;
+    controls: Subject<Record<string, Control>>;
     createControl: (id: string, control: Control) => void;
     updateControlValue: (id: string, value: Control['value']) => void;
     deleteControl: (id: string) => void;

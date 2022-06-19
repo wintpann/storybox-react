@@ -1,4 +1,4 @@
-import { RefCallback, useEffect, useState } from 'react';
+import { Dispatch, RefCallback, SetStateAction, useCallback, useEffect, useState } from 'react';
 
 export const uid = (() => {
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
@@ -14,6 +14,7 @@ export const uid = (() => {
 })();
 
 export const useExhaustiveEffect = useEffect;
+export const useExhaustiveCallback = useCallback;
 
 export const useNode = <T extends HTMLElement = HTMLElement>(): [
     node: T | null,
@@ -29,3 +30,43 @@ export const useNode = <T extends HTMLElement = HTMLElement>(): [
 };
 
 export const noop = () => null;
+
+export class Subject<T> {
+    subscribers: Array<(value: T) => void> = [];
+
+    value: T;
+
+    constructor(value: T) {
+        this.value = value;
+    }
+
+    next = (value: T) => {
+        this.value = value;
+        this.subscribers.forEach((sub) => sub(value));
+    };
+
+    subscribe = (callback: (value: T) => void) => {
+        this.subscribers.push(callback);
+        return () => {
+            this.subscribers.splice(this.subscribers.indexOf(callback), 1);
+        };
+    };
+
+    getState = () => this.value;
+}
+
+export const useSubjectValue = <T>(subject: Subject<T>): T => {
+    const [state, setState] = useState(subject.getState);
+    useExhaustiveEffect(() => subject.subscribe(setState), []);
+    return state;
+};
+
+export const useCreateSubject = <T>(initial: T): [Subject<T>, Dispatch<SetStateAction<T>>] => {
+    const [subject] = useState(() => new Subject(initial));
+    const setSubjectValue = useExhaustiveCallback((updated: T | ((prev: T) => T)) => {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        subject.next(typeof updated === 'function' ? updated(subject.getState()) : updated);
+    }, []);
+    return [subject, setSubjectValue];
+};

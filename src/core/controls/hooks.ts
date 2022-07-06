@@ -8,9 +8,10 @@ import {
     RadioControl,
     StringControl,
     UseControl,
-} from './type';
-import { uid, useExhaustiveEffect } from './utils';
-import { ControlsContext } from './story';
+} from '../type';
+import { uid } from '../utils';
+import { ControlsContext } from '../context';
+import { useExhaustiveEffect } from '../hooks/use-exhaustive';
 
 const createGenericControlHook = <T extends Control>(type: T['type']): UseControl<T> => {
     const useGenericControl: UseControl<T> = (control) => {

@@ -2,9 +2,7 @@
   "name": "storybox",
   "version": "0.0.0",
   "private": false,
-  "dependencies": {
-    "classnames": "^2.3.1"
-  },
+  "dependencies": {},
   "peerDependencies": {
     "react": ">=16.8.0"
   },

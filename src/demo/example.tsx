@@ -6,12 +6,12 @@ import {
     useNumberControl,
     useRadioControl,
     useStringControl,
-} from '../core/hooks';
-import { StoryBox } from '../core/story';
+} from '../core/controls/hooks';
+import { StoryBox } from '../core/components/story';
 
 const checkboxDefaults = ['green'];
 
-export const ExampleStory: FC = () => {
+export const Example: FC = () => {
     const [stringControl] = useStringControl({
         defaultValue: 'John',
         name: 'String control',

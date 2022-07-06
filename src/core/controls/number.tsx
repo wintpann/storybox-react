@@ -65,10 +65,10 @@ export const RenderNumberControl: FC<NumberControl> = ({
     };
 
     return (
-        <div className="storybox-control">
-            <div className="storybox-text storybox-control_label">{name}</div>
+        <div className="storybox-control-common_wrapper">
+            <div className="storybox-control-common_label">{name}</div>
             <input
-                className="storybox-input"
+                className="storybox-control-number_input"
                 type={appearanceMap[appearance]}
                 step={step}
                 value={localValue}
@@ -80,7 +80,7 @@ export const RenderNumberControl: FC<NumberControl> = ({
                 style={{ boxShadow: !isValid ? '0 0 5px 2px red' : 'none' }}
             />
             {appearance === 'range' && (
-                <div className="storybox-text storybox-control_range-outlet">{localValue}</div>
+                <div className="storybox-control-number_range-output">{localValue}</div>
             )}
         </div>
     );

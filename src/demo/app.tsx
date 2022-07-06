@@ -1,9 +1,9 @@
 import React from 'react';
-import { StoryContainer } from '../core/story-container';
-import { ExampleStory } from './example-story';
+import { StoryContainer } from '../core/components/story-container';
+import { Example } from './example';
 
-export const DemoApp = () => (
-    <div>
-        <StoryContainer Story={ExampleStory} />
-    </div>
-);
+const stories = {
+    Example,
+};
+
+export const DemoApp = () => <StoryContainer stories={stories} />;

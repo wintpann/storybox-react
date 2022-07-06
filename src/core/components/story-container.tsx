@@ -1,10 +1,12 @@
 import React, { FC } from 'react';
-import { Control, ControlsContextType } from './type';
-import { ControlsContext } from './story';
-import { useCreateSubject, useExhaustiveCallback } from './utils';
-import './styles.scss';
+import { Control, ControlsContextType } from '../type';
+import { StoryboxWindow } from './storybox-window';
+import { ControlsContext } from '../context';
+import { useCreateSubject } from '../hooks/use-subject';
+import { useExhaustiveCallback } from '../hooks/use-exhaustive';
+import '../styles.scss';
 
-export const StoryContainer: FC<{ Story: FC }> = ({ Story }) => {
+export const StoryContainer: FC<{ stories: Record<string, FC> }> = ({ stories }) => {
     const [controls, setControls] = useCreateSubject<Record<string, Control>>({});
 
     const updateControlValue: ControlsContextType['updateControlValue'] = useExhaustiveCallback(
@@ -32,12 +34,10 @@ export const StoryContainer: FC<{ Story: FC }> = ({ Story }) => {
     }, []);
 
     return (
-        <div className="storybox-story-container">
-            <ControlsContext.Provider
-                value={{ createControl, updateControlValue, deleteControl, controls }}
-            >
-                <Story />
-            </ControlsContext.Provider>
-        </div>
+        <ControlsContext.Provider
+            value={{ createControl, updateControlValue, deleteControl, controls }}
+        >
+            <StoryboxWindow stories={stories} />
+        </ControlsContext.Provider>
     );
 };

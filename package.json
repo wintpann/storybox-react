@@ -40,7 +40,7 @@
     "lint-all:tsx": "eslint src --fix --quiet",
     "lint-all:css": "prettier --write \"./src/**/*.scss\" --no-error-on-unmatched-pattern",
     "lint-all": "yarn lint-all:css && yarn lint-all:tsx",
-    "postinstall": "husky install"
+    "prepare": "husky install"
   },
   "lint-staged": {
     "src/**/*.{ts,tsx}": [

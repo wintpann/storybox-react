@@ -16,8 +16,7 @@
   },
   "license": "MIT",
   "files": [
-    "dist/index.js",
-    "dist/styles.css"
+    "dist/*"
   ],
   "bugs": {
     "url": "https://github.com/wintpann/storybox-react/issues",

@@ -29,3 +29,4 @@ yarn-error.log*
 src/react-app-env.d.ts
 build-storybook.log
 .env
+dist

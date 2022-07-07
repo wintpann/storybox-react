@@ -6,6 +6,20 @@ const appearanceMap: PropMap<Required<NumberControl>, 'appearance', string> = {
     range: 'range',
 };
 
+const getTitle = (
+    min: number | undefined,
+    max: number | undefined,
+    step: number,
+    integerOnly: boolean | undefined,
+) => {
+    const title = [];
+    if (min) title.push(`min: ${min}`);
+    if (max) title.push(`max: ${max}`);
+    title.push(`step: ${step}`);
+    title.push(`mode: ${integerOnly ? 'integer' : 'float'}`);
+    return title.join(', ');
+};
+
 export const RenderNumberControl: FC<NumberControl> = ({
     name,
     value,
@@ -68,6 +82,7 @@ export const RenderNumberControl: FC<NumberControl> = ({
         <div className="storybox-control-common_wrapper">
             <div className="storybox-control-common_label">{name}</div>
             <input
+                title={getTitle(min, max, step, integerOnly)}
                 className="storybox-control-number_input"
                 type={appearanceMap[appearance]}
                 step={step}

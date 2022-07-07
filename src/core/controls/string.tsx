@@ -1,6 +1,13 @@
 import React, { ChangeEventHandler, FC } from 'react';
 import { StringControl } from '../type';
 
+const getTitle = (min: number | undefined, max: number | undefined) => {
+    const title = [];
+    if (min) title.push(`min length: ${min}`);
+    if (max) title.push(`max length: ${max}`);
+    return title.join(', ');
+};
+
 export const RenderStringControl: FC<StringControl> = ({
     name,
     value,
@@ -24,6 +31,7 @@ export const RenderStringControl: FC<StringControl> = ({
                 type="text"
                 value={value}
                 onChange={onChange}
+                title={getTitle(minLength, maxLength)}
             />
         </div>
     );

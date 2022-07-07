@@ -35,7 +35,7 @@
     "dev": "DISABLE_ESLINT_PLUGIN=true react-scripts start",
     "build": "rm -rf dist && mkdir dist && rollup -c && tsc",
     "release": "yarn build && npx np",
-    "lint": "lint-staged && tsc --noemit",
+    "lint": "lint-staged",
     "lint-all:tsx": "eslint src --fix --quiet",
     "lint-all:css": "prettier --write \"./src/**/*.scss\" --no-error-on-unmatched-pattern",
     "lint-all": "yarn lint-all:css && yarn lint-all:tsx",

@@ -6,8 +6,7 @@ import {
     useNumberControl,
     useRadioControl,
     useStringControl,
-} from '../core/controls/hooks';
-import { StoryBox } from '../core/components/story';
+} from '../core';
 
 const checkboxDefaults = ['green'];
 
@@ -54,7 +53,7 @@ export const Example: FC = () => {
     });
 
     return (
-        <StoryBox>
+        <div>
             <div>Mock story</div>
             <br />
             <div>boolean control: {booleanControl ? 'true' : 'false'}</div>
@@ -64,6 +63,6 @@ export const Example: FC = () => {
             <div>button control (times clicked): {timesClicked}</div>
             <div>radio control: {radioControl}</div>
             <div>checkbox control: {checkboxControl.join(', ')}</div>
-        </StoryBox>
+        </div>
     );
 };

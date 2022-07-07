@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-    StoryBox,
     useBooleanControl,
     useButtonControl,
     useCheckboxControl,
@@ -56,7 +55,7 @@ export const OtherComponentStory = () => {
     });
 
     return (
-        <StoryBox>
+        <div>
             <div>Example other story</div>
             <br />
             <OtherComponent
@@ -68,6 +67,6 @@ export const OtherComponentStory = () => {
                 stringControl={stringControl}
                 timesClicked={timesClicked}
             />
-        </StoryBox>
+        </div>
     );
 };

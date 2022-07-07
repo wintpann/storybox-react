@@ -58,6 +58,11 @@ $controls-window-initial-width: 500px;
         position: fixed;
         background-color: #434343;
         display: flex;
+
+        input,
+        textarea {
+            color: #333;
+        }
     }
 
     &-controls-story {

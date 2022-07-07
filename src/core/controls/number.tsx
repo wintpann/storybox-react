@@ -13,8 +13,8 @@ const getTitle = (
     integerOnly: boolean | undefined,
 ) => {
     const title = [];
-    if (min) title.push(`min: ${min}`);
-    if (max) title.push(`max: ${max}`);
+    if (min !== undefined) title.push(`min: ${min}`);
+    if (max !== undefined) title.push(`max: ${max}`);
     title.push(`step: ${step}`);
     title.push(`mode: ${integerOnly ? 'integer' : 'float'}`);
     return title.join(', ');

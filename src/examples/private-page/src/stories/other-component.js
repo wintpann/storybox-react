@@ -8,6 +8,7 @@ import {
     useRadioControl,
     useStringControl,
 } from 'storybox-react';
+import { OtherComponent } from '../components/other-component';
 
 const checkboxDefaults = ['green'];
 
@@ -37,6 +38,7 @@ export const OtherComponentStory = () => {
     });
     const [timesClicked] = useButtonControl({
         name: 'Times clicked',
+        onClick: () => alert('oops, you clicked :)'),
     });
     const [radioControl] = useRadioControl({
         name: 'Radio control',
@@ -55,15 +57,17 @@ export const OtherComponentStory = () => {
 
     return (
         <StoryBox>
-            <div>Mock story</div>
+            <div>Example other story</div>
             <br />
-            <div>boolean control current value: {booleanControl ? 'true' : 'false'}</div>
-            <div>string control current value: {stringControl}</div>
-            <div>number control current value: {numberControl}</div>
-            <div>number range control current value: {numberRangeControl}</div>
-            <div>button control (times clicked) current value: {timesClicked}</div>
-            <div>radio control current value: {radioControl}</div>
-            <div>checkbox control current value: {checkboxControl.join(', ')}</div>
+            <OtherComponent
+                booleanControl={booleanControl}
+                checkboxControl={checkboxControl}
+                numberControl={numberControl}
+                numberRangeControl={numberRangeControl}
+                radioControl={radioControl}
+                stringControl={stringControl}
+                timesClicked={timesClicked}
+            />
         </StoryBox>
     );
 };

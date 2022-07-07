@@ -66,7 +66,6 @@ $controls-window-initial-width: 500px;
     }
 
     &-controls-window {
-        border-radius: 2px;
         background-color: rgba(0, 0, 0, 0.4);
         height: 100%;
         border: 1px solid $border-color;
@@ -78,7 +77,6 @@ $controls-window-initial-width: 500px;
     }
 
     &-active-story {
-        border-radius: 2px;
         background-color: $background-color;
         border: 1px solid $border-color;
         height: 100%;

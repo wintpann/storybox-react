@@ -3,6 +3,7 @@
   "version": "0.0.5",
   "private": false,
   "dependencies": {},
+  "description": "storybook at minimums",
   "peerDependencies": {
     "react": ">=16.8.0"
   },

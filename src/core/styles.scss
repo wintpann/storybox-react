@@ -59,6 +59,10 @@ $controls-window-initial-width: 500px;
         background-color: #434343;
         display: flex;
 
+        & * {
+            box-sizing: border-box;
+        }
+
         input,
         textarea {
             color: #333;
@@ -165,7 +169,7 @@ $controls-window-initial-width: 500px;
         }
 
         &_stories-list {
-            max-height: 100px;
+            max-height: 125px;
             overflow-y: auto;
 
             &-item {

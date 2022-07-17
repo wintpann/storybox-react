@@ -1,7 +1,8 @@
 # storybook at minimums
-## < [TRY IT OUT ON VERCEL](https://storybox-react.vercel.app) >
 
 ![DEMO](https://raw.githubusercontent.com/wintpann/storybox-react/main/demo.gif)
+
+## [TRY IT OUT ON VERCEL](https://storybox-react.vercel.app)
 
 The solution if you need some tool similar to storybook, but
 * you don't want to set up build (from project to project it can be very hard to set up storybook). With storybox you can use same build config as you use in prod, since storybox doesn't care where you use it or how you build the project.

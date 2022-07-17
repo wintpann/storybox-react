@@ -1,6 +1,6 @@
 {
   "name": "storybox-react",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "private": false,
   "dependencies": {
     "ungit": "^1.5.21"

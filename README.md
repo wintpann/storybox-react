@@ -7,7 +7,7 @@ The solution if you need some tool similar to storybook, but
 * you don't want so much features, that storybook offers (maybe you just need to have some simple "test page" with all custom components for your project)
 
 ### Usage examples
-Clone this repo and go to src/examples directory.
+Clone this repo and go to examples directory.
 * private-page is about when you want to place storybox in the same app, but within some private page. `npm start`
 * separate-entry-point is about when you don't want to include storybox to your prod bundle, but instead, use separate entrypoint for storybox page (e.g. with react-app-rewired or craco) `npm run start:storybox`
 

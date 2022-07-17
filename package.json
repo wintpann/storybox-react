@@ -2,9 +2,7 @@
   "name": "storybox-react",
   "version": "1.0.3",
   "private": false,
-  "dependencies": {
-    "ungit": "^1.5.21"
-  },
+  "dependencies": {},
   "description": "storybook at minimums",
   "peerDependencies": {
     "react": ">=16.8.0"

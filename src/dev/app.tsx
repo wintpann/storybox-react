@@ -1,9 +1,9 @@
 import React from 'react';
-import { StoryContainer } from '../core/components/story-container';
+import { StoryBox } from '../core';
 import { Example } from './example';
 
 const stories = {
     Example,
 };
 
-export const DemoApp = () => <StoryContainer stories={stories} />;
+export const DemoApp = () => <StoryBox stories={stories} />;

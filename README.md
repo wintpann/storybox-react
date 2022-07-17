@@ -52,17 +52,17 @@ export const ButtonStory = () => {
 
 ```
 
-3. Define a story container. Import stories and place it in stories prop. Render StoryContainer somewhere in the app and that's it
+3. Define a story container. Import stories and place it in stories prop. Render StoryBox somewhere in the app and that's it
 ```jsx
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import 'storybox-react/dist/styles.css';
-import { StoryContainer } from 'storybox-react';
+import { StoryBox } from 'storybox-react';
 import { ButtonStory } from '../stories/button.story';
 import { OtherComponentStory } from '../stories/other-component';
 
 const stories = { ButtonStory, OtherComponentStory };
 
-<StoryContainer stories={stories} />
+<StoryBox stories={stories} />
 
 ```

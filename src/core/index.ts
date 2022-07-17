@@ -1,4 +1,4 @@
 import './styles.scss';
 
-export { StoryContainer } from './components/story-container';
+export { StoryBox } from './components/story-box';
 export * from './controls/hooks';

@@ -6,7 +6,7 @@ import { useCreateSubject } from '../hooks/use-subject';
 import { useExhaustiveCallback } from '../hooks/use-exhaustive';
 import '../styles.scss';
 
-export const StoryContainer: FC<{ stories: Record<string, FC> }> = ({ stories }) => {
+export const StoryBox: FC<{ stories: Record<string, FC> }> = ({ stories }) => {
     const [controls, setControls] = useCreateSubject<Record<string, Control>>({});
 
     const updateControl: ControlsContextType['updateControl'] = useExhaustiveCallback(

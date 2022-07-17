@@ -1,24 +1,7 @@
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import 'storybox-react/dist/styles.css';
+import React from 'react';
+import 'storybox-react/dist/styles.css'; // import storybox specific styles
+import 'bootstrap/dist/css/bootstrap.min.css'; // import bootstrat styles since we use bootstrap components for the demo
 import { StoryContainer } from 'storybox-react';
-import { ButtonStory } from '../stories/button.story';
-import { OtherComponentStory } from '../stories/other-component';
+import { stories } from '../stories';
 
-const stories = { ButtonStory, OtherComponentStory };
-
-export const Storybox = () => {
-    const [authenticated, setAuthenticated] = useState(false);
-    const navigate = useNavigate();
-
-    useEffect(() => {
-        const pass = prompt('pass? (123)');
-        if (pass === '123') {
-            setAuthenticated(true);
-        } else {
-            navigate('/');
-        }
-    }, []);
-
-    return authenticated ? <StoryContainer stories={stories} /> : null;
-};
+export const StoryboxPage = () => <StoryContainer stories={stories} />

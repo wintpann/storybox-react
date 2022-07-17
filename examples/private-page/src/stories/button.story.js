@@ -1,34 +1,36 @@
-import { Button } from '../components/button';
-import {
-    useBooleanControl,
-    useNumberControl,
-    useRadioControl,
-    useStringControl,
-} from 'storybox-react';
+import Button from 'react-bootstrap/Button';
+
+import { useBooleanControl, useRadioControl, useStringControl } from 'storybox-react';
+import { DefaultStoryWrapper } from '../storybox/default-story-wrapper';
+import { variants } from './common';
 
 export const ButtonStory = () => {
-    const [children] = useStringControl({
-        defaultValue: 'my button',
-        name: 'children',
+    const [title] = useStringControl({
+        defaultValue: 'Click',
+        name: 'title',
         minLength: 0,
         maxLength: 30,
     });
-    const [padding] = useNumberControl({
-        defaultValue: 10,
-        name: 'padding',
-        max: 100,
-        min: 10,
-        integerOnly: true,
-        appearance: 'range',
+    const [size] = useRadioControl({
+        name: 'size',
+        options: ['sm', 'lg'],
+        defaultValue: 'lg',
     });
-    const [type] = useRadioControl({
-        name: 'type',
-        options: ['primary', 'danger'],
+    const [variant] = useRadioControl({
+        name: 'variant',
+        options: variants,
         defaultValue: 'primary',
     });
     const [disabled] = useBooleanControl({
         name: 'disabled',
         defaultValue: false,
     });
-    return <Button children={children} padding={padding} type={type} disabled={disabled} />;
+
+    return (
+        <DefaultStoryWrapper>
+            <Button disabled={disabled} size={size} variant={variant}>
+                {title}
+            </Button>
+        </DefaultStoryWrapper>
+    );
 };

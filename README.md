@@ -1,4 +1,5 @@
 # storybook at minimums
+## < [TRY IT OUT ON VERCEL](https://storybox-react.vercel.app) >
 
 ![DEMO](https://raw.githubusercontent.com/wintpann/storybox-react/main/demo.gif)
 
@@ -13,7 +14,7 @@ Clone this repo and go to examples directory.
 
 ### Usage
 
-1. Define stories for each component you want. There are 7 types of controls available: boolean, checkbox, radio, button, number, range number, string. `OtherComponentStory` in example repos demonstrates all of them.
+1. Define stories for each component you want. There are 7 types of controls available: boolean, checkbox, radio, button, number, range number, string.
 ```jsx
 import { Button } from '../components/button';
 import {
@@ -52,16 +53,15 @@ export const ButtonStory = () => {
 
 ```
 
-3. Define a story container. Import stories and place it in stories prop. Render StoryBox somewhere in the app and that's it
+3. Define a story container. Import stories and place it in stories prop. Render `StoryBox` somewhere in the app and that's it
 ```jsx
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import 'storybox-react/dist/styles.css';
 import { StoryBox } from 'storybox-react';
 import { ButtonStory } from '../stories/button.story';
-import { OtherComponentStory } from '../stories/other-component';
 
-const stories = { ButtonStory, OtherComponentStory };
+const stories = { ButtonStory };
 
 <StoryBox stories={stories} />
 

@@ -1,5 +1,6 @@
 import React, { ChangeEventHandler, FC, KeyboardEventHandler, useState } from 'react';
 import { NumberControl, PropMap } from '../type';
+import { useExhaustiveEffect } from '../hooks/use-exhaustive';
 
 const appearanceMap: PropMap<Required<NumberControl>, 'appearance', string> = {
     input: 'text',
@@ -77,6 +78,19 @@ export const RenderNumberControl: FC<NumberControl> = ({
             onChange(value - step);
         }
     };
+
+    useExhaustiveEffect(() => {
+        if (min && value < min) {
+            setLocalValue(String(min));
+            setValue(min);
+            return;
+        }
+
+        if (max && value > max) {
+            setLocalValue(String(max));
+            setValue(max);
+        }
+    }, [min, max]);
 
     return (
         <div className="storybox-control-common_wrapper">

@@ -36,3 +36,10 @@ export class Subject<T> {
 
     getState = () => this.value;
 }
+
+export const pick = <T>(object: T, keys: string[]): Partial<T> =>
+    keys
+        .filter((key) => key in object)
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        .reduce((result, key) => ({ ...result, [key]: object[key] }), {});

@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState, useRef } from 'react';
+import { useContext, useState, useRef } from 'react';
 import {
     BooleanControl,
     ButtonControl,
@@ -9,19 +9,34 @@ import {
     StringControl,
     UseControl,
 } from '../type';
-import { uid } from '../utils';
+import { pick, uid } from '../utils';
 import { ControlsContext } from '../context';
 import { useExhaustiveEffect } from '../hooks/use-exhaustive';
 
-const createGenericControlHook = <T extends Control>(type: T['type']): UseControl<T> => {
+const createGenericControlHook = <T extends Control>(
+    type: T['type'],
+    updateOnChange: Array<keyof Omit<T, '' | 'type' | 'id' | 'value' | 'setValue'>> = [],
+): UseControl<T> => {
     const useGenericControl: UseControl<T> = (control) => {
-        const { deleteControl, updateControlValue, createControl } = useContext(ControlsContext);
+        const { deleteControl, createControl, updateControl } = useContext(ControlsContext);
         const [value, setValue] = useState(control.defaultValue);
         const idRef = useRef<string>();
 
         useExhaustiveEffect(() => {
-            if (idRef.current) updateControlValue(idRef.current, value);
+            if (idRef.current) updateControl(idRef.current, { value });
         }, [value]);
+
+        useExhaustiveEffect(
+            () => {
+                if (idRef.current) {
+                    updateControl(
+                        idRef.current,
+                        pick(control as unknown as T, updateOnChange as string[]),
+                    );
+                }
+            },
+            updateOnChange.map((key) => control[key]),
+        );
 
         useExhaustiveEffect(() => {
             const id = uid();
@@ -29,8 +44,6 @@ const createGenericControlHook = <T extends Control>(type: T['type']): UseContro
             createControl(id, { ...control, type, value, setValue, id } as T);
             return () => deleteControl(id);
         }, []);
-
-        useEffect(() => setValue(control.defaultValue), [control.defaultValue]);
 
         return [value, setValue];
     };
@@ -40,22 +53,25 @@ const createGenericControlHook = <T extends Control>(type: T['type']): UseContro
 
 export const useBooleanControl = createGenericControlHook<BooleanControl>('boolean');
 
-export const useStringControl = createGenericControlHook<StringControl>('string');
+export const useStringControl = createGenericControlHook<StringControl>('string', [
+    'maxLength',
+    'minLength',
+]);
 
-export const useNumberControl = createGenericControlHook<NumberControl>('number');
+export const useNumberControl = createGenericControlHook<NumberControl>('number', ['min', 'max']);
 
 export const useRadioControl = createGenericControlHook<RadioControl>('radio');
 
 export const useCheckboxControl = createGenericControlHook<CheckboxControl>('checkbox');
 
 export const useButtonControl: UseControl<ButtonControl, 'defaultValue'> = (control) => {
-    const { deleteControl, updateControlValue, createControl } = useContext(ControlsContext);
+    const { deleteControl, createControl, updateControl } = useContext(ControlsContext);
     const [value, setValue] = useState(0);
     const idRef = useRef<string>();
 
     useExhaustiveEffect(() => {
         if (idRef.current) {
-            updateControlValue(idRef.current, value);
+            updateControl(idRef.current, { value });
             control.onClick?.();
         }
     }, [value]);

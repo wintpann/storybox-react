@@ -9,11 +9,11 @@ import '../styles.scss';
 export const StoryContainer: FC<{ stories: Record<string, FC> }> = ({ stories }) => {
     const [controls, setControls] = useCreateSubject<Record<string, Control>>({});
 
-    const updateControlValue: ControlsContextType['updateControlValue'] = useExhaustiveCallback(
-        (id, value) => {
+    const updateControl: ControlsContextType['updateControl'] = useExhaustiveCallback(
+        (id, partial) => {
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore
-            setControls((prev) => ({ ...prev, [id]: { ...prev[id], value } }));
+            setControls((prev) => ({ ...prev, [id]: { ...prev[id], ...partial } }));
         },
         [],
     );
@@ -34,9 +34,7 @@ export const StoryContainer: FC<{ stories: Record<string, FC> }> = ({ stories })
     }, []);
 
     return (
-        <ControlsContext.Provider
-            value={{ createControl, updateControlValue, deleteControl, controls }}
-        >
+        <ControlsContext.Provider value={{ createControl, deleteControl, controls, updateControl }}>
             <StoryboxWindow stories={stories} />
         </ControlsContext.Provider>
     );

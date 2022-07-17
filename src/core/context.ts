@@ -4,7 +4,7 @@ import { noop, Subject } from './utils';
 
 export const ControlsContext = createContext<ControlsContextType>({
     controls: new Subject<Record<string, Control>>({}),
-    updateControlValue: noop,
+    updateControl: noop,
     deleteControl: noop,
     createControl: noop,
 });

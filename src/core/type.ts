@@ -58,7 +58,7 @@ export type UseControl<ControlType extends Control, OmitTypes extends string = '
 export type ControlsContextType = {
     controls: Subject<Record<string, Control>>;
     createControl: (id: string, control: Control) => void;
-    updateControlValue: (id: string, value: Control['value']) => void;
+    updateControl: (id: string, partial: Partial<Control>) => void;
     deleteControl: (id: string) => void;
 };
 

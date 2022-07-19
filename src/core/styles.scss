@@ -58,15 +58,6 @@ $controls-window-initial-width: 500px;
         position: fixed;
         background-color: #434343;
         display: flex;
-
-        & * {
-            box-sizing: border-box;
-        }
-
-        input,
-        textarea {
-            color: #333;
-        }
     }
 
     &-controls-story {
@@ -83,6 +74,15 @@ $controls-window-initial-width: 500px;
         flex: 0 0 $controls-window-initial-width;
         min-width: 200px;
         max-width: calc(100% - 220px);
+
+        & * {
+            box-sizing: border-box;
+        }
+
+        input,
+        textarea {
+            color: #333;
+        }
     }
 
     &-active-story {

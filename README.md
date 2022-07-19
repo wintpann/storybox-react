@@ -2,7 +2,7 @@
 <img src='https://raw.githubusercontent.com/wintpann/storybox-react/main/logo.png' height='80' alt='Logo' />
 
 
-![DEMO](https://raw.githubusercontent.com/wintpann/storybox-react/main/demo.gif)
+![DEMO](https://raw.githubusercontent.com/wintpann/storybox-react/main/demo-storybox.gif)
 
 ## [TRY IT OUT ON VERCEL](https://storybox-react.vercel.app)
 

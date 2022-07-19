@@ -17,6 +17,7 @@ export interface StringControl extends BaseControl<string> {
     type: 'string';
     maxLength?: number;
     minLength?: number;
+    washRegex?: RegExp;
 }
 
 export interface NumberControl extends BaseControl<number> {

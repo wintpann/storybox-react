@@ -14,12 +14,12 @@ export const RenderStringControl: FC<StringControl> = ({
     setValue,
     minLength,
     maxLength,
+    washRegex,
 }) => {
     const onChange: ChangeEventHandler<HTMLTextAreaElement> = (e) => {
-        const updated: string = e.target.value;
+        const updated: string = washRegex ? e.target.value.replace(washRegex, '') : e.target.value;
         if (maxLength && updated.length > maxLength) return;
         if (minLength && updated.length < minLength) return;
-
         setValue(updated);
     };
 

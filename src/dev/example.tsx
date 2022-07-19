@@ -17,6 +17,15 @@ export const Example: FC = () => {
         minLength: 0,
         maxLength: 1000,
     });
+
+    const [stringRegexControl] = useStringControl({
+        defaultValue: '1234',
+        name: 'String control with regex',
+        minLength: 0,
+        maxLength: 10,
+        washRegex: /\D/g,
+    });
+
     const [numberControl] = useNumberControl({
         defaultValue: 3,
         name: 'Number control',
@@ -25,6 +34,7 @@ export const Example: FC = () => {
         step: 1,
         integerOnly: true,
     });
+
     const [numberRangeControl] = useNumberControl({
         defaultValue: 3,
         name: 'Number range control',
@@ -34,19 +44,23 @@ export const Example: FC = () => {
         integerOnly: true,
         appearance: 'range',
     });
+
     const [timesClicked] = useButtonControl({
         name: 'Times clicked',
     });
+
     const [radioControl] = useRadioControl({
         name: 'Radio control',
         options: ['true', 'false'],
         defaultValue: 'true',
     });
+
     const [checkboxControl] = useCheckboxControl({
         name: 'Checkbox control',
         options: ['green', 'blue', 'yellow'],
         defaultValue: checkboxDefaults,
     });
+
     const [booleanControl] = useBooleanControl({
         name: 'Boolean control',
         defaultValue: true,
@@ -58,6 +72,10 @@ export const Example: FC = () => {
             <br />
             <div>boolean control: {booleanControl ? 'true' : 'false'}</div>
             <div>string control: {stringControl}</div>
+            <div>
+                string control with regex for not allowed symbols (/\D/g all except digits not
+                allowed): {stringRegexControl}
+            </div>
             <div>number control: {numberControl}</div>
             <div>number range control: {numberRangeControl}</div>
             <div>button control (times clicked): {timesClicked}</div>

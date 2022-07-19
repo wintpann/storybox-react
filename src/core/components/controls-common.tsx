@@ -23,6 +23,14 @@ export const ControlsCommon: FC<ControlsCommonProps> = ({
     );
     return (
         <div className="storybox-controls-common">
+            <a
+                href="https://www.npmjs.com/package/storybox-react"
+                className="storybox-controls-common_logo"
+                target="_blank"
+                rel="noreferrer"
+            >
+                storybox npm
+            </a>
             <div className="storybox-controls-common_bounds">
                 <div>
                     Window: {windowBounds?.width}&nbsp;x&nbsp;{windowBounds?.height}
@@ -40,14 +48,20 @@ export const ControlsCommon: FC<ControlsCommonProps> = ({
                         onChange={(e) => setSearchText(e.target.value)}
                     />
                 </div>
-                <div className="storybox-controls-common_story-picker-name">
-                    {activeStoryKey || 'No story selected'}
+                <div className="storybox-controls-common_story-picker-name" title="selected story">
+                    {`< ${activeStoryKey || 'No story selected'} >`}
                 </div>
             </div>
             <div className="storybox-controls-common_stories-list storybox-scroll">
                 {storiesMatched.map(([key]) => (
                     <div
-                        onClick={() => setActiveStoryKey(key)}
+                        onClick={() => {
+                            if (key === activeStoryKey) {
+                                setActiveStoryKey('');
+                            } else {
+                                setActiveStoryKey(key);
+                            }
+                        }}
                         className="storybox-controls-common_stories-list-item"
                         key={key}
                         style={{ background: key === activeStoryKey ? '#355c88' : undefined }}

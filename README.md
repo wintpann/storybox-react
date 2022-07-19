@@ -1,4 +1,6 @@
 # storybook at minimums
+<img src='https://raw.githubusercontent.com/wintpann/storybox-react/main/logo.png' height='50' alt='Logo' />
+
 
 ![DEMO](https://raw.githubusercontent.com/wintpann/storybox-react/main/demo.gif)
 

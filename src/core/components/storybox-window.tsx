@@ -16,7 +16,8 @@ export const StoryboxWindow: FC<StoryboxWindowProps> = ({ stories }) => {
     const dataRef = useRef(dataRefInitial);
     const controlsWindowRef = useRef<HTMLDivElement>(null);
     const activeStoryRef = useRef<HTMLDivElement>(null);
-    const [activeStoryKey, setActiveStoryKey] = useState<string>('');
+    const firstStoryKey = () => Object.entries(stories)[0][0] ?? '';
+    const [activeStoryKey, setActiveStoryKey] = useState<string>(firstStoryKey);
 
     const onStartResize: StartEndCallback = () => {
         if (!controlsWindowRef.current) return;

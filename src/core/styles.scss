@@ -125,6 +125,14 @@ $controls-window-initial-width: 500px;
             border: 1px solid $border-color;
         }
 
+        &_logo {
+            color: #b4bbc6;
+            text-transform: uppercase;
+            text-align: center;
+            display: block;
+            margin-top: 5px;
+        }
+
         &_bounds {
             display: flex;
 
@@ -150,7 +158,6 @@ $controls-window-initial-width: 500px;
             }
 
             &-name {
-                background: #358840;
                 width: 100%;
                 height: 25px;
                 display: flex;

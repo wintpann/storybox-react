@@ -56,6 +56,7 @@ export const useBooleanControl = createGenericControlHook<BooleanControl>('boole
 export const useStringControl = createGenericControlHook<StringControl>('string', [
     'maxLength',
     'minLength',
+    'washRegex',
 ]);
 
 export const useNumberControl = createGenericControlHook<NumberControl>('number', ['min', 'max']);

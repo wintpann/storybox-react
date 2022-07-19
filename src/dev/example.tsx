@@ -11,19 +11,17 @@ import {
 const checkboxDefaults = ['green'];
 
 export const Example: FC = () => {
+    const [washRegexEnabled] = useBooleanControl({
+        name: 'string wash regex enabled (/\\D/g)',
+        defaultValue: false,
+    });
+
     const [stringControl] = useStringControl({
         defaultValue: 'John',
         name: 'String control',
         minLength: 0,
         maxLength: 1000,
-    });
-
-    const [stringRegexControl] = useStringControl({
-        defaultValue: '1234',
-        name: 'String control with regex',
-        minLength: 0,
-        maxLength: 10,
-        washRegex: /\D/g,
+        washRegex: washRegexEnabled ? /\D/g : undefined,
     });
 
     const [numberControl] = useNumberControl({
@@ -71,10 +69,9 @@ export const Example: FC = () => {
             <div>Mock story</div>
             <br />
             <div>boolean control: {booleanControl ? 'true' : 'false'}</div>
-            <div>string control: {stringControl}</div>
             <div>
-                string control with regex for not allowed symbols (/\D/g all except digits not
-                allowed): {stringRegexControl}
+                string control {washRegexEnabled ? `(wash regex /\\D/g enabled)` : ''}:{' '}
+                {stringControl}
             </div>
             <div>number control: {numberControl}</div>
             <div>number range control: {numberRangeControl}</div>

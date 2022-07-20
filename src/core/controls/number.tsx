@@ -28,7 +28,7 @@ export const RenderNumberControl: FC<NumberControl> = ({
     min,
     max,
     step = 1,
-    integerOnly,
+    integerOnly = false,
     appearance = 'input',
 }) => {
     const [localValue, setLocalValue] = useState(String(value));

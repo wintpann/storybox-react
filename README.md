@@ -214,3 +214,22 @@ type UseCheckboxControlReturn = [
 
 export type useCheckboxControl = (params: UseCheckboxControlParams) => UseCheckboxControlReturn;
 ```
+
+### useButtonControl
+```typescript
+type UseButtonControlParams = {
+  /** name for control that will be displayed on the left panel */
+  name: string;
+  /** click handler */
+  onClick?: () => void;
+}
+
+type UseButtonControlReturn = [
+  /** counter: how many times the button has been clicked */
+  number,
+  /** update counter above */
+  (newValue: number) => void,
+]
+
+export type useButtonControl = (params: UseButtonControlParams) => UseButtonControlReturn;
+```

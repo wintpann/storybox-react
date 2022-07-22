@@ -6,7 +6,13 @@ import { useCreateSubject } from '../hooks/use-subject';
 import { useExhaustiveCallback } from '../hooks/use-exhaustive';
 import '../styles.scss';
 
-export const StoryBox: FC<{ stories: Record<string, FC> }> = ({ stories }) => {
+export function StoryBox<T extends Record<string, FC> = Record<string, never>>({
+    stories,
+    defaultStoryKey,
+}: {
+    stories: T;
+    defaultStoryKey?: keyof T;
+}) {
     const [controls, setControls] = useCreateSubject<Record<string, Control>>({});
 
     const updateControl: ControlsContextType['updateControl'] = useExhaustiveCallback(
@@ -35,7 +41,7 @@ export const StoryBox: FC<{ stories: Record<string, FC> }> = ({ stories }) => {
 
     return (
         <ControlsContext.Provider value={{ createControl, deleteControl, controls, updateControl }}>
-            <StoryboxWindow stories={stories} />
+            <StoryboxWindow stories={stories} defaultStoryKey={defaultStoryKey as string} />
         </ControlsContext.Provider>
     );
-};
+}

@@ -83,9 +83,11 @@ const stories = { ButtonStory };
 ## `<StoryBox/>` component API
 
 ```typescript jsx
-export type StoryBox = FC<{
+export type StoryBox<T extends Record<string, FC> = Record<string, never>> = FC<{
   /** All your stories placed in one object */
-  stories: Record<string, FC>;
+  stories: T;
+  /** Default selected story key */
+  defaultSelectedStory?: keyof T;
 }>;
 ```
 

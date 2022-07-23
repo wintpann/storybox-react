@@ -61,6 +61,7 @@ export type ControlsContextType = {
     createControl: (id: string, control: Control) => void;
     updateControl: (id: string, partial: Partial<Control>) => void;
     deleteControl: (id: string) => void;
+    withinContext: boolean;
 };
 
 export type PropMap<Type extends Record<Key, any>, Key extends keyof Type, Value> = {

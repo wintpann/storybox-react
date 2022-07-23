@@ -40,7 +40,9 @@ export function StoryBox<T extends Record<string, FC> = Record<string, never>>({
     }, []);
 
     return (
-        <ControlsContext.Provider value={{ createControl, deleteControl, controls, updateControl }}>
+        <ControlsContext.Provider
+            value={{ createControl, deleteControl, controls, updateControl, withinContext: true }}
+        >
             <StoryboxWindow stories={stories} defaultStoryKey={defaultStoryKey as string} />
         </ControlsContext.Provider>
     );

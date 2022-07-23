@@ -43,3 +43,15 @@ export const pick = <T>(object: T, keys: string[]): Partial<T> =>
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         .reduce((result, key) => ({ ...result, [key]: object[key] }), {});
+
+export const invariant = (() => {
+    let called = false;
+    return (withinContext: boolean) => {
+        if (!called && !withinContext) {
+            console.error(
+                `[Storybox]: Component with usage of any control hook should not be rendered on its own since it's useless. Place it in *stories* prop of <StoryBox/> component`,
+            );
+            called = true;
+        }
+    };
+})();

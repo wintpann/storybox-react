@@ -9,7 +9,7 @@ import {
     StringControl,
     UseControl,
 } from '../type';
-import { pick, uid } from '../utils';
+import { invariant, pick, uid } from '../utils';
 import { ControlsContext } from '../context';
 import { useExhaustiveEffect } from '../hooks/use-exhaustive';
 
@@ -18,7 +18,8 @@ const createGenericControlHook = <T extends Control>(
     updateOnChange: Array<keyof Omit<T, '' | 'type' | 'id' | 'value' | 'setValue'>> = [],
 ): UseControl<T> => {
     const useGenericControl: UseControl<T> = (control) => {
-        const { deleteControl, createControl, updateControl } = useContext(ControlsContext);
+        const { deleteControl, createControl, updateControl, withinContext } =
+            useContext(ControlsContext);
         const [value, setValue] = useState(control.defaultValue);
         const idRef = useRef<string>();
 
@@ -39,6 +40,7 @@ const createGenericControlHook = <T extends Control>(
         );
 
         useExhaustiveEffect(() => {
+            invariant(withinContext);
             const id = uid();
             idRef.current = id;
             createControl(id, { ...control, type, value, setValue, id } as T);
@@ -66,7 +68,8 @@ export const useRadioControl = createGenericControlHook<RadioControl>('radio');
 export const useCheckboxControl = createGenericControlHook<CheckboxControl>('checkbox');
 
 export const useButtonControl: UseControl<ButtonControl, 'defaultValue'> = (control) => {
-    const { deleteControl, createControl, updateControl } = useContext(ControlsContext);
+    const { deleteControl, createControl, updateControl, withinContext } =
+        useContext(ControlsContext);
     const [value, setValue] = useState(0);
     const idRef = useRef<string>();
 
@@ -78,6 +81,7 @@ export const useButtonControl: UseControl<ButtonControl, 'defaultValue'> = (cont
     }, [value]);
 
     useExhaustiveEffect(() => {
+        invariant(withinContext);
         const id = uid();
         idRef.current = id;
         createControl(id, {

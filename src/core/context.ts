@@ -7,4 +7,5 @@ export const ControlsContext = createContext<ControlsContextType>({
     updateControl: noop,
     deleteControl: noop,
     createControl: noop,
+    withinContext: false,
 });

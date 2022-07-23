@@ -13,11 +13,11 @@ const dataRefInitial = {
     controlsWindowWidth: 500,
 };
 
-export const StoryboxWindow: FC<StoryboxWindowProps> = ({ stories, defaultStoryKey = '' }) => {
+export const StoryboxWindow: FC<StoryboxWindowProps> = ({ stories, defaultStoryKey }) => {
     const dataRef = useRef(dataRefInitial);
     const controlsWindowRef = useRef<HTMLDivElement>(null);
     const activeStoryRef = useRef<HTMLDivElement>(null);
-    const firstStoryKey = () => Object.entries(stories)[0][0] ?? defaultStoryKey;
+    const firstStoryKey = () => defaultStoryKey ?? Object.entries(stories)[0][0] ?? '';
     const [activeStoryKey, setActiveStoryKey] = useState<string>(firstStoryKey);
 
     const onStartResize: StartEndCallback = () => {

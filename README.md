@@ -234,3 +234,71 @@ type UseButtonControlReturn = [
 
 export type useButtonControl = (params: UseButtonControlParams) => UseButtonControlReturn;
 ```
+
+## CHANGELOG
+
+### 0.0.1 `06.07.2022`
+* Initial release
+
+### 0.0.2 `06.07.2022`
+* Fix prepare script
+
+### 0.0.3 `06.07.2022`
+* Correct dist files
+
+### 0.0.4 `07.07.2022`
+* Add controls informers
+
+### 0.0.5 `07.07.2022`
+* Add examples
+
+### 0.0.6 `07.07.2022`
+* Fix description
+
+### 0.1.0 `17.07.2022`
+* Fix updating controls on min/max change
+
+### 1.0.0 `17.07.2022`
+* Change contracts
+
+### 1.0.1 `17.07.2022`
+* Style fixes
+
+### 1.0.2 `18.07.2022`
+* Style fixes
+
+### 1.0.3 `18.07.2022`
+* Update readme
+
+### 1.0.4 `18.07.2022`
+* Remove useless dependency
+
+### 1.0.5 `19.07.2022`
+* Export types
+
+### 1.0.6 `19.07.2022`
+* Style fixes
+
+### 1.0.7 `19.07.2022`
+* Small fixes
+
+### 1.0.8 `19.07.2022`
+* Add wash regex to string input
+
+### 1.0.9 `19.07.2022`
+* Fixes
+
+### 1.0.10 `21.07.2022`
+* Update readme
+
+### 1.0.11 `22.07.2022`
+* Add default story key prop
+
+### 1.0.12 `23.07.2022`
+* Fixes
+
+### 1.0.13 `23.07.2022`
+* Add invariant context
+
+### 1.0.14 `07.08.2022`
+* Update readme

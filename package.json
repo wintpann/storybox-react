@@ -1,6 +1,6 @@
 {
   "name": "storybox-react",
-  "version": "1.0.16",
+  "version": "1.0.17",
   "private": false,
   "dependencies": {
     "react-error-boundary": "^3.1.4"

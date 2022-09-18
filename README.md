@@ -302,3 +302,6 @@ export type useButtonControl = (params: UseButtonControlParams) => UseButtonCont
 
 ### 1.0.14 `07.08.2022`
 * Update readme
+
+### 1.0.15 `18.09.2022`
+* Add error boundary to the active story

@@ -64,6 +64,13 @@ export const Example: FC = () => {
         defaultValue: true,
     });
 
+    useButtonControl({
+        name: 'Throw an error',
+        onClick: () => {
+            throw new Error('Woopsie doopsie!');
+        },
+    });
+
     return (
         <div>
             <div>Mock story</div>

@@ -43,7 +43,11 @@ export const StoryboxWindow: FC<StoryboxWindowProps> = ({ stories, defaultStoryK
                 activeStoryKey={activeStoryKey}
             />
             <WindowResizer onMove={onResize} onStart={onStartResize} />
-            <ActiveStory containerRef={activeStoryRef} Story={stories[activeStoryKey]} />
+            <ActiveStory
+                containerRef={activeStoryRef}
+                Story={stories[activeStoryKey]}
+                storyKey={activeStoryKey}
+            />
         </div>
     );
 };

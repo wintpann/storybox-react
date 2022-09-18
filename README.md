@@ -305,3 +305,6 @@ export type useButtonControl = (params: UseButtonControlParams) => UseButtonCont
 
 ### 1.0.15 `18.09.2022`
 * Add error boundary to the active story
+
+### 1.0.16 `18.09.2022`
+* Replace with react-error-boundary npm

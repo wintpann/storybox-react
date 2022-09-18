@@ -1,6 +1,6 @@
 {
   "name": "storybox-react",
-  "version": "1.0.14",
+  "version": "1.0.15",
   "private": false,
   "dependencies": {},
   "description": "storybook at minimums",

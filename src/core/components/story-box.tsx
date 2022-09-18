@@ -1,9 +1,11 @@
 import React, { FC } from 'react';
+import { ErrorBoundary } from 'react-error-boundary';
 import { Control, ControlsContextType } from '../type';
 import { StoryboxWindow } from './storybox-window';
 import { ControlsContext } from '../context';
 import { useCreateSubject } from '../hooks/use-subject';
-import { useExhaustiveCallback } from '../hooks/use-exhaustive';
+import { useExhaustiveCallback, useExhaustiveMemo } from '../hooks/use-exhaustive';
+import { ErrorScreen } from './error-screen';
 import '../styles.scss';
 
 export function StoryBox<T extends Record<string, FC> = Record<string, never>>({
@@ -13,6 +15,22 @@ export function StoryBox<T extends Record<string, FC> = Record<string, never>>({
     stories: T;
     defaultStoryKey?: keyof T;
 }) {
+    const decoratedWithBoundaryStories = useExhaustiveMemo<T>(() => {
+        const result: Record<string, FC> = {};
+        Object.entries(stories).forEach(([key, Story]) => {
+            result[key] = () => (
+                <ErrorBoundary
+                    fallbackRender={({ error, resetErrorBoundary }) => (
+                        <ErrorScreen error={error} tryAgain={resetErrorBoundary} storyKey={key} />
+                    )}
+                >
+                    <Story />
+                </ErrorBoundary>
+            );
+        });
+        return result as T;
+    }, []);
+
     const [controls, setControls] = useCreateSubject<Record<string, Control>>({});
 
     const updateControl: ControlsContextType['updateControl'] = useExhaustiveCallback(
@@ -43,7 +61,10 @@ export function StoryBox<T extends Record<string, FC> = Record<string, never>>({
         <ControlsContext.Provider
             value={{ createControl, deleteControl, controls, updateControl, withinContext: true }}
         >
-            <StoryboxWindow stories={stories} defaultStoryKey={defaultStoryKey as string} />
+            <StoryboxWindow
+                stories={decoratedWithBoundaryStories}
+                defaultStoryKey={defaultStoryKey as string}
+            />
         </ControlsContext.Provider>
     );
 }

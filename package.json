@@ -2,7 +2,9 @@
   "name": "storybox-react",
   "version": "1.0.15",
   "private": false,
-  "dependencies": {},
+  "dependencies": {
+    "react-error-boundary": "^3.1.4"
+  },
   "description": "storybook at minimums",
   "peerDependencies": {
     "react": ">=16.8.0"

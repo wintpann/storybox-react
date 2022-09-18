@@ -308,3 +308,6 @@ export type useButtonControl = (params: UseButtonControlParams) => UseButtonCont
 
 ### 1.0.16 `18.09.2022`
 * Replace with react-error-boundary npm
+
+### 1.0.17 `18.09.2022`
+* Add more readable typings. Fix readme

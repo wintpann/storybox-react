@@ -53,21 +53,116 @@ const createGenericControlHook = <T extends Control>(
     return useGenericControl;
 };
 
-export const useBooleanControl = createGenericControlHook<BooleanControl>('boolean');
+type UseBooleanControlParams = {
+    /** name for control that will be displayed on the left panel */
+    name: string;
+    /** initial value */
+    defaultValue: boolean;
+};
 
-export const useStringControl = createGenericControlHook<StringControl>('string', [
-    'maxLength',
-    'minLength',
-    'washRegex',
-]);
+type UseBooleanControlReturn = [
+    /** current control value */
+    boolean,
+    /** handler for manually value updating */
+    (newValue: boolean) => void,
+];
+export const useBooleanControl: (params: UseBooleanControlParams) => UseBooleanControlReturn =
+    createGenericControlHook<BooleanControl>('boolean');
 
-export const useNumberControl = createGenericControlHook<NumberControl>('number', ['min', 'max']);
+type UseStringControlParams = {
+    /** name for control that will be displayed on the left panel */
+    name: string;
+    /** initial value */
+    defaultValue: string;
+    /** validating input for min length if passed */
+    minLength?: number;
+    /** validating input for max length if passed */
+    maxLength?: number;
+    /**
+     * "washing" input with that regex if passed
+     * @example
+     * you need a string only with numbers and spaces.
+     * so you create a regex that will match all EXCEPT numbers and spaces.
+     * all matches will be removed
+     * "a4 bcd 123".replace(/[^\s\d]/g, "") => "4  123"
+     */
+    washRegex?: RegExp;
+};
 
-export const useRadioControl = createGenericControlHook<RadioControl>('radio');
+type UseStringControlReturn = [
+    string /** current control value */,
+    (newValue: string) => void /** handler for manually value updating */,
+];
+export const useStringControl: (params: UseStringControlParams) => UseStringControlReturn =
+    createGenericControlHook<StringControl>('string', ['maxLength', 'minLength', 'washRegex']);
 
-export const useCheckboxControl = createGenericControlHook<CheckboxControl>('checkbox');
+type UseNumberControlParams = {
+    /** name for control that will be displayed on the left panel */
+    name: string;
+    /** initial value */
+    defaultValue: number;
+    /** validating input for min if passed */
+    min?: number;
+    /** validating input for max if passed */
+    max?: number;
+    /** accepts only integer if passed
+     * @default [integerOnly=false]
+     */
+    integerOnly?: boolean;
+    /** plain input or range appearance on left panel
+     * @default [appearance="input"]
+     */
+    appearance?: 'input' | 'range';
+    /** step for changing values if you have chosen "range" appearance
+     * @default [step=1]
+     */
+    step?: number;
+};
 
-export const useButtonControl: UseControl<ButtonControl, 'defaultValue'> = (control) => {
+type UseNumberControlReturn = [
+    number /** current control value */,
+    (newValue: number) => void /** handler for manually value updating */,
+];
+export const useNumberControl: (params: UseNumberControlParams) => UseNumberControlReturn =
+    createGenericControlHook<NumberControl>('number', ['min', 'max']);
+
+type UseRadioControlParams = {
+    /** name for control that will be displayed on the left panel */
+    name: string;
+    /** initial value */
+    defaultValue: string;
+    /** options for radio group */
+    options: string[];
+};
+
+type UseRadioControlReturn = [
+    /** current control value */
+    string,
+    /** handler for manually value updating */
+    (newValue: string) => void,
+];
+export const useRadioControl: (params: UseRadioControlParams) => UseRadioControlReturn =
+    createGenericControlHook<RadioControl>('radio');
+
+type UseCheckboxControlParams = {
+    /** name for control that will be displayed on the left panel */
+    name: string;
+    /** initial value */
+    defaultValue: string[];
+    /** options for checkbox group */
+    options: string[];
+};
+
+type UseCheckboxControlReturn = [
+    /** current control value */
+    string[],
+    /** handler for manually value updating */
+    (newValue: string[]) => void,
+];
+export const useCheckboxControl: (params: UseCheckboxControlParams) => UseCheckboxControlReturn =
+    createGenericControlHook<CheckboxControl>('checkbox');
+
+const createButtonControl = (): UseControl<ButtonControl, 'defaultValue'> => (control) => {
     const { deleteControl, createControl, updateControl, withinContext } =
         useContext(ControlsContext);
     const [value, setValue] = useState(0);
@@ -97,3 +192,20 @@ export const useButtonControl: UseControl<ButtonControl, 'defaultValue'> = (cont
 
     return [value, setValue];
 };
+
+type UseButtonControlParams = {
+    /** name for control that will be displayed on the left panel */
+    name: string;
+    /** click handler */
+    onClick?: () => void;
+};
+
+type UseButtonControlReturn = [
+    /** counter: how many times the button has been clicked */
+    number,
+    /** update counter above */
+    (newValue: number) => void,
+];
+
+export const useButtonControl: (params: UseButtonControlParams) => UseButtonControlReturn =
+    createButtonControl();

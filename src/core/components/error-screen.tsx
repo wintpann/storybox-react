@@ -1,10 +1,13 @@
 import React, { FC } from 'react';
 
-type ErrorScreenProps = { error: Error; tryAgain: () => void; storyKey: string };
+type ErrorScreenProps = { error: Error; tryAgain: () => void; storyKey?: string };
 
 export const ErrorScreen: FC<ErrorScreenProps> = ({ error, tryAgain, storyKey }) => (
     <div className="storybox-error">
-        <h3 className="storybox-error_title">Oops, there was an error in your story: {storyKey}</h3>
+        <h3 className="storybox-error_title">
+            Oops, there was an error
+            {storyKey ? ` in your story: ${storyKey}` : ' in some of your story'}{' '}
+        </h3>
         <span className="storybox-error_message">Message: {error.message}</span>
         <span className="storybox-error_tip">Check the console to see more</span>
         <button

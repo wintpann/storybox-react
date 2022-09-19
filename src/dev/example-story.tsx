@@ -7,6 +7,8 @@ import {
     useRadioControl,
     useStringControl,
 } from '../core';
+import { useExhaustiveEffect } from '../core/hooks/use-exhaustive';
+import { useAction } from '../core/hooks/use-action';
 
 const checkboxDefaults = ['green'];
 
@@ -70,6 +72,18 @@ export const Example: FC = () => {
             throw new Error('Woopsie doopsie!');
         },
     });
+
+    const [hasBomb] = useBooleanControl({
+        name: 'CABOOM after you leave this story?',
+        defaultValue: false,
+    });
+
+    const caboom = useAction(() => {
+        if (!hasBomb) return;
+        throw new Error('CABOOM!');
+    });
+
+    useExhaustiveEffect(() => caboom, []);
 
     return (
         <div>

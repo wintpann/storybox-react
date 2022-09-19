@@ -311,3 +311,6 @@ export type useButtonControl = (params: UseButtonControlParams) => UseButtonCont
 
 ### 1.0.17 `18.09.2022`
 * Add more readable typings. Fix readme
+
+### 1.0.18 `19.09.2022`
+* Add error boundary to stories container

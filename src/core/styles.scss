@@ -87,7 +87,7 @@ $controls-window-initial-width: 500px;
 
     &-active-story {
         background-color: $background-color;
-        overflow: hidden;
+        overflow-x: hidden;
         height: 100%;
         flex: 1;
         min-width: 200px;

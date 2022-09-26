@@ -317,3 +317,6 @@ export type useButtonControl = (params: UseButtonControlParams) => UseButtonCont
 
 ### 1.0.19 `19.09.2022`
 * Style fix
+
+### 1.0.20 `26.09.2022`
+* Fix error {nothing was returned from render}

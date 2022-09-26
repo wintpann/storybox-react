@@ -14,7 +14,7 @@ export const ActiveStory: FC<ActiveStoryProps> = ({ containerRef, Story }) => (
                 <ErrorScreen error={error} tryAgain={resetErrorBoundary} />
             )}
         >
-            {Story && <Story />}
+            {Story ? <Story /> : null}
         </ErrorBoundary>
     </div>
 );

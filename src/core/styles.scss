@@ -58,6 +58,10 @@ $controls-window-initial-width: 500px;
         position: fixed;
         background-color: #434343;
         display: flex;
+
+        & input {
+            -webkit-appearance: auto !important;
+        }
     }
 
     &-controls-story {

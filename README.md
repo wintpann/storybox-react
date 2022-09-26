@@ -320,3 +320,6 @@ export type useButtonControl = (params: UseButtonControlParams) => UseButtonCont
 
 ### 1.0.20 `26.09.2022`
 * Fix error {nothing was returned from render}
+
+### 1.0.21 `26.09.2022`
+* Fix checkbox force disappearance

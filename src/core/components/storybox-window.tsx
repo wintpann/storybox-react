@@ -7,13 +7,18 @@ import { MoveCallback, StartEndCallback } from '../hooks/use-drag';
 export type StoryboxWindowProps = {
     stories: Record<string, FC>;
     defaultStoryKey?: string;
+    onStoryKeyChange?: (key?: string) => void;
 };
 
 const dataRefInitial = {
     controlsWindowWidth: 500,
 };
 
-export const StoryboxWindow: FC<StoryboxWindowProps> = ({ stories, defaultStoryKey }) => {
+export const StoryboxWindow: FC<StoryboxWindowProps> = ({
+    stories,
+    defaultStoryKey,
+    onStoryKeyChange,
+}) => {
     const dataRef = useRef(dataRefInitial);
     const controlsWindowRef = useRef<HTMLDivElement>(null);
     const activeStoryRef = useRef<HTMLDivElement>(null);
@@ -41,6 +46,7 @@ export const StoryboxWindow: FC<StoryboxWindowProps> = ({ stories, defaultStoryK
                 storiesList={Object.entries(stories)}
                 setActiveStoryKey={setActiveStoryKey}
                 activeStoryKey={activeStoryKey}
+                onStoryKeyChange={onStoryKeyChange}
             />
             <WindowResizer onMove={onResize} onStart={onStartResize} />
             <ActiveStory containerRef={activeStoryRef} Story={stories[activeStoryKey]} />

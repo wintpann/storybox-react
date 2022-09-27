@@ -87,6 +87,11 @@ export type StoryBox<T extends Record<string, FC> = Record<string, never>> = FC<
   stories: T;
   /** Default selected story key */
   defaultSelectedStory?: keyof T;
+  /** Callback triggers on story key change.
+   * [string] if some story has been selected
+   * [undefined] - if unselected
+   */
+  onStoryKeyChange?: (key?: string) => void;
 }>;
 ```
 
@@ -323,3 +328,6 @@ export type useButtonControl = (params: UseButtonControlParams) => UseButtonCont
 
 ### 1.0.21 `26.09.2022`
 * Fix checkbox force disappearance
+
+### 1.0.22 `27.09.2022`
+* Add onStoryKeyChange prop

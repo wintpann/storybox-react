@@ -12,6 +12,7 @@ export type ControlsWindowProps = {
     storiesList: Array<[string, FC]>;
     setActiveStoryKey: (key: string) => void;
     activeStoryKey: string;
+    onStoryKeyChange?: (key?: string) => void;
 };
 
 export const ControlsWindow: FC<ControlsWindowProps> = ({
@@ -20,6 +21,7 @@ export const ControlsWindow: FC<ControlsWindowProps> = ({
     storiesList,
     setActiveStoryKey,
     activeStoryKey,
+    onStoryKeyChange,
 }) => {
     const [activeStoryBounds, setActiveStoryBounds] = useState<Bounds | undefined>();
     const [windowBounds, setWindowBounds] = useState<WindowBounds | undefined>();
@@ -37,6 +39,7 @@ export const ControlsWindow: FC<ControlsWindowProps> = ({
                 storiesList={storiesList}
                 setActiveStoryKey={setActiveStoryKey}
                 activeStoryKey={activeStoryKey}
+                onStoryKeyChange={onStoryKeyChange}
             />
             <div className="storybox-controls-story">
                 {Object.entries(controls).map(([id, control]) => (

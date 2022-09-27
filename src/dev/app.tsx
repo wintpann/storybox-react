@@ -8,4 +8,6 @@ const stories = {
     Bullshit,
 };
 
-export const DemoApp = () => <StoryBox stories={stories} />;
+export const DemoApp = () => (
+    <StoryBox stories={stories} onStoryKeyChange={(key) => console.log('story key changed', key)} />
+);

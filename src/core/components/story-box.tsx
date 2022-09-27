@@ -11,9 +11,11 @@ import '../styles.scss';
 export function StoryBox<T extends Record<string, FC> = Record<string, never>>({
     stories,
     defaultStoryKey,
+    onStoryKeyChange,
 }: {
     stories: T;
     defaultStoryKey?: keyof T;
+    onStoryKeyChange?: (key?: keyof T) => void;
 }) {
     const decoratedWithBoundaryStories = useExhaustiveMemo<T>(() => {
         const result: Record<string, FC> = {};
@@ -64,6 +66,7 @@ export function StoryBox<T extends Record<string, FC> = Record<string, never>>({
             <StoryboxWindow
                 stories={decoratedWithBoundaryStories}
                 defaultStoryKey={defaultStoryKey as string}
+                onStoryKeyChange={onStoryKeyChange}
             />
         </ControlsContext.Provider>
     );

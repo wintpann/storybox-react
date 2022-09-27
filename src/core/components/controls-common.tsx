@@ -8,6 +8,7 @@ export type ControlsCommonProps = {
     storiesList: Array<[string, FC]>;
     setActiveStoryKey: (key: string) => void;
     activeStoryKey: string;
+    onStoryKeyChange?: (key?: string) => void;
 };
 
 export const ControlsCommon: FC<ControlsCommonProps> = ({
@@ -16,6 +17,7 @@ export const ControlsCommon: FC<ControlsCommonProps> = ({
     storiesList,
     setActiveStoryKey,
     activeStoryKey,
+    onStoryKeyChange,
 }) => {
     const [searchText, setSearchText] = useState('');
     const storiesMatched = storiesList.filter(([key]) =>
@@ -58,8 +60,10 @@ export const ControlsCommon: FC<ControlsCommonProps> = ({
                         onClick={() => {
                             if (key === activeStoryKey) {
                                 setActiveStoryKey('');
+                                onStoryKeyChange?.();
                             } else {
                                 setActiveStoryKey(key);
+                                onStoryKeyChange?.(key);
                             }
                         }}
                         className="storybox-controls-common_stories-list-item"

@@ -24,9 +24,11 @@ export const StoryboxWindow: FC<StoryboxWindowProps> = ({
     const activeStoryRef = useRef<HTMLDivElement>(null);
     const firstStoryKey = () => defaultStoryKey ?? Object.entries(stories)[0][0] ?? '';
     const [activeStoryKey, setActiveStoryKey] = useState<string>(firstStoryKey);
+    const [noPointerEvents, setNoPointerEvents] = useState(false);
 
     const onStartResize: StartEndCallback = () => {
         if (!controlsWindowRef.current) return;
+        setNoPointerEvents(true);
 
         dataRef.current.controlsWindowWidth = controlsWindowRef.current.offsetWidth;
     };
@@ -38,6 +40,9 @@ export const StoryboxWindow: FC<StoryboxWindowProps> = ({
             dataRef.current.controlsWindowWidth + deltaX
         }px`;
     };
+
+    const onEndResize = () => setNoPointerEvents(false);
+
     return (
         <div className="storybox-container">
             <ControlsWindow
@@ -48,8 +53,12 @@ export const StoryboxWindow: FC<StoryboxWindowProps> = ({
                 activeStoryKey={activeStoryKey}
                 onStoryKeyChange={onStoryKeyChange}
             />
-            <WindowResizer onMove={onResize} onStart={onStartResize} />
-            <ActiveStory containerRef={activeStoryRef} Story={stories[activeStoryKey]} />
+            <WindowResizer onMove={onResize} onStart={onStartResize} onEnd={onEndResize} />
+            <ActiveStory
+                containerRef={activeStoryRef}
+                Story={stories[activeStoryKey]}
+                noPointerEvents={noPointerEvents}
+            />
         </div>
     );
 };

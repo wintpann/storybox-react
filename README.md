@@ -331,3 +331,6 @@ export type useButtonControl = (params: UseButtonControlParams) => UseButtonCont
 
 ### 1.0.22 `27.09.2022`
 * Add onStoryKeyChange prop
+
+### 1.0.23 `28.09.2022`
+* Fix drag resizer

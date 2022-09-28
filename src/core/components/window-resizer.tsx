@@ -6,12 +6,14 @@ const getResizeDragCursor = () => 'ew-resize';
 export type WindowResizerProps = {
     onMove: MoveCallback;
     onStart: StartEndCallback;
+    onEnd: StartEndCallback;
 };
 
-export const WindowResizer: FC<WindowResizerProps> = ({ onMove, onStart }) => {
+export const WindowResizer: FC<WindowResizerProps> = ({ onMove, onStart, onEnd }) => {
     const resizerHandlers = useDragHandlers({
         onMove,
         onStartMove: onStart,
+        onEndMove: onEnd,
         getCursor: getResizeDragCursor,
     });
 

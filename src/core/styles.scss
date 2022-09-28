@@ -27,6 +27,10 @@ $controls-window-initial-width: 500px;
 }
 
 .storybox {
+    &-no-pointer-events {
+        pointer-events: none;
+    }
+
     &-scroll {
         scrollbar-color: $scrollbar-color transparent;
 

@@ -1,13 +1,15 @@
-import React, { FC, useRef, useState } from 'react';
+import React, { FC, useCallback, useRef, useState } from 'react';
 import { ControlsWindow } from './controls-window';
 import { ActiveStory } from './active-story';
 import { WindowResizer } from './window-resizer';
 import { MoveCallback, StartEndCallback } from '../hooks/use-drag';
+import { useDoubleKeypress } from '../hooks/use-double-keypress';
 
 export type StoryboxWindowProps = {
     stories: Record<string, FC>;
     defaultStoryKey?: string;
     onStoryKeyChange?: (key?: string) => void;
+    decorator?: (Story: FC) => FC;
 };
 
 const dataRefInitial = {
@@ -18,6 +20,7 @@ export const StoryboxWindow: FC<StoryboxWindowProps> = ({
     stories,
     defaultStoryKey,
     onStoryKeyChange,
+    decorator,
 }) => {
     const dataRef = useRef(dataRefInitial);
     const controlsWindowRef = useRef<HTMLDivElement>(null);
@@ -25,6 +28,11 @@ export const StoryboxWindow: FC<StoryboxWindowProps> = ({
     const firstStoryKey = () => defaultStoryKey ?? Object.entries(stories)[0][0] ?? '';
     const [activeStoryKey, setActiveStoryKey] = useState<string>(firstStoryKey);
     const [noPointerEvents, setNoPointerEvents] = useState(false);
+    const [panelShown, setPanelShown] = useState(true);
+
+    const handleDoubleShift = useCallback(() => setPanelShown((prev) => !prev), []);
+
+    useDoubleKeypress('Shift', handleDoubleShift);
 
     const onStartResize: StartEndCallback = () => {
         if (!controlsWindowRef.current) return;
@@ -45,19 +53,24 @@ export const StoryboxWindow: FC<StoryboxWindowProps> = ({
 
     return (
         <div className="storybox-container">
-            <ControlsWindow
-                containerRef={controlsWindowRef}
-                activeStoryRef={activeStoryRef}
-                storiesList={Object.entries(stories)}
-                setActiveStoryKey={setActiveStoryKey}
-                activeStoryKey={activeStoryKey}
-                onStoryKeyChange={onStoryKeyChange}
-            />
-            <WindowResizer onMove={onResize} onStart={onStartResize} onEnd={onEndResize} />
+            {panelShown && (
+                <>
+                    <ControlsWindow
+                        containerRef={controlsWindowRef}
+                        activeStoryRef={activeStoryRef}
+                        storiesList={Object.entries(stories)}
+                        setActiveStoryKey={setActiveStoryKey}
+                        activeStoryKey={activeStoryKey}
+                        onStoryKeyChange={onStoryKeyChange}
+                    />
+                    <WindowResizer onMove={onResize} onStart={onStartResize} onEnd={onEndResize} />
+                </>
+            )}
             <ActiveStory
                 containerRef={activeStoryRef}
                 Story={stories[activeStoryKey]}
                 noPointerEvents={noPointerEvents}
+                decorator={decorator}
             />
         </div>
     );

@@ -31,7 +31,7 @@ export const ControlsCommon: FC<ControlsCommonProps> = ({
                 target="_blank"
                 rel="noreferrer"
             >
-                storybox npm
+                tip: use double shift to hide/show left panel
             </a>
             <div className="storybox-controls-common_bounds">
                 <div>
